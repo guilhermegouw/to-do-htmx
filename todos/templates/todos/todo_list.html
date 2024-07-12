@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="todo-list-container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+            {% for todo in todos %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ todo.title }}</h5>
+                    <p class="card-text">{{ todo.description }}</p>
+                    <a class="btn btn-outline-success" href="#" hx-get="{% url 'mark_todo_complete' todo.id %}" hx-target="#content" hx-swap="innerHTML">
+                        <i class="bi bi-check-lg"></i> {% if todo.completed %}Uncomplete{% else %}Complete{% endif %}
+                    </a>
+                    <a class="btn btn-outline-primary" href="#" hx-get="{% url 'edit_todo_form' todo.id %}" hx-target="#content" hx-swap="innerHTML">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <a class="btn btn-outline-danger" href="#" hx-get="{% url 'delete_todo' todo.id %}" hx-target="#content" hx-swap="innerHTML">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
